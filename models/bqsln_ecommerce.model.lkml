@@ -2,7 +2,7 @@ connection: "bqsln_looker"
 
 # include all the views
 include: "/views/**/*.view"
-
+include: "../premium_customers.view"
 datagroup: bqsln_ecommerce_default_datagroup {
   sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
@@ -10,7 +10,13 @@ datagroup: bqsln_ecommerce_default_datagroup {
 
 persist_with: bqsln_ecommerce_default_datagroup
 
-explore: users {}
+explore: users {
+  join: premium_customers {
+    type: left_outer
+    sql_on: ${users.user_id} = ${premium_customers.userid} ;;
+    relationship: one_to_one
+  }
+}
 
 explore: connection_reg_r3 {}
 

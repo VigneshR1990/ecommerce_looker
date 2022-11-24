@@ -1,4 +1,5 @@
 include: "../data_tests.lkml"
+include: "../premium_customers.view"
 view: orders {
   sql_table_name: `ecommerce_bq_looker.orders`
     ;;
