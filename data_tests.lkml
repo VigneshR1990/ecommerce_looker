@@ -1,3 +1,5 @@
+include: "views/orders.view"
+
 test: order_date_is_accurate {
   explore_source: orders {
     column: order_date {
@@ -26,3 +28,22 @@ test: unique_items_quantity_is_accurate {
   }
 
 }
+
+
+
+
+test: order_id_is_unique {
+  explore_source: orders {
+    column: order_year {
+
+    }
+    column: count {}
+
+    filters: [ orders.order_year: "2020"]
+  }
+  assert: order_id_is_unique {
+    expression: sum(${orders.count}) = 2215 ;;
+
+
+  }
+  }

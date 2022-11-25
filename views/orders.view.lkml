@@ -62,6 +62,14 @@ view: orders {
     sql: ${TABLE}.userId ;;
   }
 
+
+  dimension: order_year {
+    type: string
+    # hidden: yes
+    sql: substring(${TABLE}.orderDate,0,4);;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [detail*]
