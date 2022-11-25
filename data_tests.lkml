@@ -32,7 +32,7 @@ test: unique_items_quantity_is_accurate {
 
 
 
-test: order_id_is_unique {
+test: order_year_2020_is_accurate {
   explore_source: orders {
     column: order_year {
 
