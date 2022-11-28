@@ -5,7 +5,7 @@ include: "/views/**/*.view"
 include: "../premium_customers.view"
 include: "../orders_by_year.view"
 datagroup: bqsln_ecommerce_default_datagroup {
-  sql_trigger: SELECT MAX(id) FROM etl_log;;
+  max_cache_age: "10 seconds"
 
 }
 

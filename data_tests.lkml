@@ -45,7 +45,7 @@ test: order_year_2020_is_accurate {
     filters: [ orders.order_year: "2020"]
   }
   assert: order_year_2020_is_accurate {
-    expression: sum(${orders.count}) = 2215 ;;
+    expression: sum(${orders.count}) = 2216 ;;
 
 
   }
