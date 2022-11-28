@@ -1,5 +1,5 @@
 include: "views/orders.view"
-
+include: "orders_by_year.view"
 test: order_date_is_accurate {
   explore_source: orders {
     column: order_date {
@@ -32,6 +32,8 @@ test: unique_items_quantity_is_accurate {
 
 
 
+
+
 test: order_year_2020_is_accurate {
   explore_source: orders {
     column: order_year {
@@ -41,9 +43,28 @@ test: order_year_2020_is_accurate {
 
     filters: [ orders.order_year: "2020"]
   }
-  assert: order_id_is_unique {
+  assert: order_year_2020_is_accurate {
     expression: sum(${orders.count}) = 2215 ;;
 
 
   }
   }
+
+
+
+
+test: order_year_2021_is_accurate {
+  explore_source: orders {
+    column: order_year {
+
+    }
+    column: count {}
+
+    filters: [ orders.order_year: "2021"]
+  }
+  assert: order_year_2021_is_accurate {
+    expression: sum(${orders.count}) = 595 ;;
+
+
+  }
+}

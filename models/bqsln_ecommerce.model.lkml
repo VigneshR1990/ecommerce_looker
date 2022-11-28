@@ -3,6 +3,7 @@ connection: "bqsln_looker"
 # include all the views
 include: "/views/**/*.view"
 include: "../premium_customers.view"
+include: "../orders_by_year.view"
 datagroup: bqsln_ecommerce_default_datagroup {
   sql_trigger: SELECT MAX(id) FROM etl_log;;
 
@@ -31,6 +32,13 @@ explore: orders {
     view_label: "Orders: Lineitems"
     sql: LEFT JOIN UNNEST(${orders.line_items}) as orders__line_items ;;
     relationship: one_to_many
+  }
+
+  join: orders_by_year {
+    type: left_outer
+
+    sql_on: LEFT(${orders.user_id} , 4)  = ${orders_by_year.order_year} ;;
+    relationship: many_to_one
   }
 }
 
